@@ -10,7 +10,11 @@ Installation
 
 Quickstart
 ----------
-`pycsvjson <csvfile> <mappingfile> --output <outfile>`
+`pycsvjson csvfile mappingfile --output outfile`
+
+For extended options: `pycsvjson --help`
+
+For more information on what a mapping file is, see https://github.com/pudo/jsonmapping
 
 Status
 ------

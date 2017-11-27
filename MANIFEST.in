@@ -1,0 +1,15 @@
+exclude .gitignore
+exclude .coverage
+exclude .gitlab-ci.yml
+include AUTHORS
+include LICENSE
+include VERSION
+include REQUIREMENTS
+include README.md
+include setup.cfg
+prune .cache
+prune .git
+prune build
+prune dist
+recursive-exclude *.egg-info *
+recursive-include tests *

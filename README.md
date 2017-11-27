@@ -4,7 +4,7 @@ A command-line utility to convert CSV files to JSON.
 
 Installation
 ------------
-*Requires:* Python 3
+**Requires:** Python 3
 
 `pip install pycsvjson`
 

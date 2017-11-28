@@ -3,7 +3,6 @@ exclude .coverage
 exclude .gitlab-ci.yml
 include AUTHORS
 include LICENSE
-include VERSION
 include REQUIREMENTS
 include README.md
 include setup.cfg

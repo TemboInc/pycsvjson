@@ -18,7 +18,7 @@ setup(
     version=VERSION,
     description="A utility to transform CSV files into structured JSON",
     long_description=read('README.md'),
-    url='https://github.com/nicholastulach/pycsvjson',
+    url='https://github.com/TemboInc/pycsvjson',
     license='MIT License',
     author='Tembo Inc.',
     author_email='devsupport@temboinc.com',

@@ -28,7 +28,7 @@ from jsonschema import RefResolver
 from jsonmapping import Mapper
 from tqdm import tqdm
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 def row_count(filename):
     """ Counts the rows in a given file """

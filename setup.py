@@ -20,8 +20,8 @@ setup(
     long_description=read('README.md'),
     url='https://github.com/nicholastulach/pycsvjson',
     license='MIT License',
-    author='Nicholas K Tulach',
-    author_email='nkt@ftml.net',
+    author='Tembo Inc.',
+    author_email='devsupport@temboinc.com',
     packages=find_packages(exclude=['tests']),
     classifiers=[
         'Development Status :: 3 - Alpha',

@@ -69,7 +69,7 @@ def map_row(csvfile, mapfile, columns=None):
     total_rows = row_count(csvfile)
 
     if isinstance(csvfile, str):
-        csvfile = open(csvfile, 'r')
+        csvfile = open(csvfile, 'r', encoding='utf-8-sig')
     for row in tqdm(csv.DictReader(csvfile), total=total_rows):
         row = {key: value for key, value in row.items() if key in columns} \
               if columns else row

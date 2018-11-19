@@ -22,13 +22,24 @@
 
 import argparse
 import csv
+import os
 import ujson as json
 from boltons.iterutils import remap
 from jsonschema import RefResolver
 from jsonmapping import Mapper
 from tqdm import tqdm
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
+
+TEMPFILE = 'temp.csv'
+
+def convert_file(in_file, out_file):
+    from bs4 import UnicodeDammit
+    with open(in_file, 'rb') as source, \
+         open(out_file, mode='w', encoding='utf-8-sig') as out:
+        for line in source:
+            dammit = UnicodeDammit(line)
+            out.write(dammit.unicode_markup)
 
 def row_count(filename):
     """ Counts the rows in a given file """
@@ -69,10 +80,10 @@ def map_row(csvfile, mapfile, columns=None):
     total_rows = row_count(csvfile)
 
     if isinstance(csvfile, str):
-        csvfile = open(csvfile, 'r', encoding='utf-8-sig')
-    for row in tqdm(csv.DictReader(csvfile), total=total_rows):
+        csvfp = open(csvfile, 'r', encoding='utf-8-sig')
+    for row in tqdm(csv.DictReader(csvfp), total=total_rows):
         row = {key: value for key, value in row.items() if key in columns} \
-              if columns else row
+            if columns else row
         _, data = mapper.apply(row)
         data = remap(data, visit=drop_blank)
         yield data
@@ -96,8 +107,15 @@ def main():
         version="%(prog)s (version {version})".format(version=__version__))
     args = parser.parse_args()
     with open(args.output, 'w') as ofp:
-        indent = 4 if args.pretty else 0
-        json.dump(map_row(args.csvfile, args.mapfile), ofp, indent=indent)
+        try:
+            convert_file(args.csvfile, TEMPFILE)
+            indent = 4 if args.pretty else 0
+            json.dump(map_row(TEMPFILE, args.mapfile), ofp, indent=indent)
+        finally:
+            try:
+                os.remove(TEMPFILE)
+            except OSError:
+                pass
 
 if __name__ == "__main__":
     main()
